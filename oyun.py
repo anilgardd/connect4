@@ -32,29 +32,54 @@ class Connect_Four():
             result += '-' *23
             f.write(result)
 
-
-
+    
     def drop(self, col, team: str):
-
         if col:
             if col.isdigit():
                 col = int(col)
-                if col < 10 and col > -1 or col == None:
+                if col < len(self.board[0]) and col > -1 or col == None:
                     col -= 1
                     if self.board[0][col] == ' ':
-                        for i in range(8, -1, -1):
+                        for i in range(len(self.board)-1, -1, -1):
                             if self.board[i][col] == ' ':
                                 self.board[i][col] = team
                                 break
+                        else:
+                            print('That column is full dill weed. Look much? You\'ve lost your turn.')
                     else:
-                        print(
-                            'That column is full dill weed.  Look much?  You\'ve lost your turn')
+                        print('That column is full dill weed. Look much? You\'ve lost your turn.')
                 else:
-                    print('1... to... 9... dumbass...  You lose your turn')
+                    print('1... to... ' + str(len(self.board[0])) + '... dumbass... You lose your turn.')
             else:
-                print('NUMBERS (WO)MAN!  I NEED NUMBERS!  Lose a turn.')
+                print('NUMBERS (WO)MAN! I NEED NUMBERS! Lose a turn.')
         else:
-            print('... You have to enter something you troglodite.  Lose a turn')
+            print('... You have to enter something you troglodite. Lose a turn.')
+        
+        
+
+
+
+    # def drop(self, col, team: str):
+
+    #     if col:
+    #         if col.isdigit():
+    #             col = int(col)
+    #             if col < 10 and col > -1 or col == None:
+    #                 col -= 1
+    #                 if self.board[0][col] == ' ':
+    #                     for i in range(8, -1, -1):
+    #                         if self.board[i][col] == ' ':
+    #                             self.board[i][col] = team
+    #                             break
+    #                 else:
+    #                     print(
+    #                         'That column is full dill weed.  Look much?  You\'ve lost your turn')
+    #             else:
+    #                 print('1... to... 9... dumbass...  You lose your turn')
+    #         else:
+    #             print('NUMBERS (WO)MAN!  I NEED NUMBERS!  Lose a turn.')
+    #     else:
+    #         print('... You have to enter something you troglodite.  Lose a turn')
 
     def check(self, team: str):
 
@@ -113,10 +138,11 @@ if __name__ == '__main__':
             print('Please choose a token different from player 1...  How ya gonna tell the difference in teams?  Dummy.')
 
     while not board.check(team1) and not board.check(team2):
-        col = input(f'Player 1 ({team1}) insert piece in col (1-7): ')
+        col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
         board.print_board()
         board.print_board_to_file("Tahta.txt")
+        # board.hamle_kaydet("Hamle.txt" , "1. oyuncu", col, team1)
 
         if board.check(team1):
             print(f'PLAYER 1 ({team1}) WINS!')
@@ -126,10 +152,13 @@ if __name__ == '__main__':
             print('GAME TIED!  YOU BOTH LOSE!')
             quit()
 
-        col = input(f'Player 2 ({team2}) insert piece in col (1-7): ')
+        col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
         board.print_board()
         board.print_board_to_file("Tahta.txt")
+        # print(f'Player 2 ({team2}) inserted piece in col ({col}): ')
+       
+        # board.hamle_kaydet("Hamle.txt" , "2. oyuncu", col, team2)
 
         if board.check(team2):
             print(f'PLAYER 2 ({team2}) WINS!')
