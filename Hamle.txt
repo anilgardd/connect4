@@ -37,3 +37,10 @@
 1. oyuncu 5inci kolon 8inci satira hamle yapti.
 2. oyuncu 6inci kolon 8inci satira hamle yapti.
 1. oyuncu 7inci kolon 8inci satira hamle yapti.
+0: (0, 8)
+0: (0, 8)
+x: (1, 8)
+0: (2, 8)
+x: (2, 7)
+0: (3, 8)
+x: (3, 7)

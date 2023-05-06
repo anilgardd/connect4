@@ -1,9 +1,10 @@
 import os
 
 class Connect_Four():
-
+    
     COL_COUNT = 9
     ROW_COUNT = 9
+
 
     def __init__(self):
         self.board = [[' ' for i in range(Connect_Four.COL_COUNT)] for j in range(
@@ -34,6 +35,7 @@ class Connect_Four():
 
     
     def drop(self, col, team: str):
+        
         if col:
             if col.isdigit():
                 col = int(col)
@@ -43,6 +45,8 @@ class Connect_Four():
                         for i in range(len(self.board)-1, -1, -1):
                             if self.board[i][col] == ' ':
                                 self.board[i][col] = team
+                                with open("Hamle.txt", "a") as f:
+                                    f.write(f"{team}: ({col}, {i})\n")
                                 break
                         else:
                             print('That column is full dill weed. Look much? You\'ve lost your turn.')
@@ -55,31 +59,13 @@ class Connect_Four():
         else:
             print('... You have to enter something you troglodite. Lose a turn.')
         
-        
+    
+
+            
 
 
 
-    # def drop(self, col, team: str):
-
-    #     if col:
-    #         if col.isdigit():
-    #             col = int(col)
-    #             if col < 10 and col > -1 or col == None:
-    #                 col -= 1
-    #                 if self.board[0][col] == ' ':
-    #                     for i in range(8, -1, -1):
-    #                         if self.board[i][col] == ' ':
-    #                             self.board[i][col] = team
-    #                             break
-    #                 else:
-    #                     print(
-    #                         'That column is full dill weed.  Look much?  You\'ve lost your turn')
-    #             else:
-    #                 print('1... to... 9... dumbass...  You lose your turn')
-    #         else:
-    #             print('NUMBERS (WO)MAN!  I NEED NUMBERS!  Lose a turn.')
-    #     else:
-    #         print('... You have to enter something you troglodite.  Lose a turn')
+  
 
     def check(self, team: str):
 
@@ -117,6 +103,7 @@ class Connect_Four():
                     return False
         return True
     
+        
 
    
 
@@ -142,7 +129,9 @@ if __name__ == '__main__':
         board.drop(col, team1)
         board.print_board()
         board.print_board_to_file("Tahta.txt")
-        # board.hamle_kaydet("Hamle.txt" , "1. oyuncu", col, team1)
+        # last_move = board.last_move()
+        # print(last_move)
+        
 
         if board.check(team1):
             print(f'PLAYER 1 ({team1}) WINS!')
@@ -156,9 +145,9 @@ if __name__ == '__main__':
         board.drop(col, team2)
         board.print_board()
         board.print_board_to_file("Tahta.txt")
-        # print(f'Player 2 ({team2}) inserted piece in col ({col}): ')
-       
-        # board.hamle_kaydet("Hamle.txt" , "2. oyuncu", col, team2)
+        # last_move = board.last_move()
+        # print(last_move)
+        
 
         if board.check(team2):
             print(f'PLAYER 2 ({team2}) WINS!')
