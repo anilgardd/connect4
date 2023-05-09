@@ -14,6 +14,9 @@ class Connect_Four():
         with open("tahta.txt", "r") as f:
             print(f.read())
 
+    def reset_board(self, filename):
+        with open(filename, 'w') as f:
+            f.write('')
 
 
     # def print_board(self):
@@ -115,6 +118,7 @@ class Connect_Four():
 
 if __name__ == '__main__':
     board = Connect_Four()
+    # board.reset_board("Tahta.txt")
     board.print_board()
 
     team1, team2 = '', ''
