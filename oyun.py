@@ -10,16 +10,22 @@ class Connect_Four():
         self.board = [[' ' for i in range(Connect_Four.COL_COUNT)] for j in range(
             Connect_Four.ROW_COUNT)]
 
-    def print_board(self):
+    def print_board(self, filename=None):
+        with open("tahta.txt", "r") as f:
+            print(f.read())
 
-        result = ''
-        for i in self.board:
-            result += '-' * 23 + '\n'
-            for j in i:
-                result += f'|{j}'
-            result += '|\n'
-        result += '-' * 23
-        print(result)
+
+
+    # def print_board(self):
+
+    #     result = ''
+    #     for i in self.board:
+    #         result += '-' * 23 + '\n'
+    #         for j in i:
+    #             result += f'|{j}'
+    #         result += '|\n'
+    #     result += '-' * 23
+    #     print(result)
 
     def print_board_to_file (self, filename):
         with open(filename,'w') as f:
@@ -127,8 +133,11 @@ if __name__ == '__main__':
     while not board.check(team1) and not board.check(team2):
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
-        board.print_board()
+        # board.print_board()
+        # board.print_board_to_file("Tahta.txt")
         board.print_board_to_file("Tahta.txt")
+        board.print_board("Tahta.txt")
+        
         # last_move = board.last_move()
         # print(last_move)
         
@@ -143,8 +152,12 @@ if __name__ == '__main__':
 
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
-        board.print_board()
+
+        # board.print_board()
+        # board.print_board_to_file("Tahta.txt")
         board.print_board_to_file("Tahta.txt")
+        board.print_board("Tahta.txt")
+
         # last_move = board.last_move()
         # print(last_move)
         
