@@ -134,17 +134,85 @@ if __name__ == '__main__':
         if team2 == team1:
             print('Please choose a token different from player 1...  How ya gonna tell the difference in teams?  Dummy.')
 
+
+
+
+    # while not board.check(team1) and not board.check(team2):
+    #     print("Press 'm' to open menu.")
+    #     user_input = input()
+    #     while True:
+            
+    #         if user_input == "m":
+    #             print("Menu Options:")
+    #             print("1. New Game")
+    #             print("2. Continue Game")
+    #             print("3. Save Game")
+    #             menu_input = input("Select an option: ")
+    #             if menu_input == "1":
+    #                 # Handle new game
+    #                 break
+    #             elif menu_input == "2":
+    #                 # Handle continue game
+    #                 print("Continuing game...")
+    #             elif menu_input == "3":
+    #                 # Handle save game
+    #                 print("Saving game...")
+    #             else:
+    #                 print("Invalid input. Please try again.")
+    #         else:
+    #             col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
+    #             board.drop(col, team1)
+    #             board.print_board_to_file("Tahta.txt")
+    #             board.print_board("Tahta.txt")
+    #             if board.check(team1):
+    #                 print(f'PLAYER 1 ({team1}) WINS!')
+    #                 quit()
+    #             if board.check_tie():
+    #                 print('GAME TIED!  YOU BOTH LOSE!')
+    #                 quit()
+
+    #             col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
+    #             board.drop(col, team2)
+    #             board.print_board_to_file("Tahta.txt")
+    #             board.print_board("Tahta.txt")
+    #             if board.check(team2):
+    #                 print(f'PLAYER 2 ({team2}) WINS!')
+    #                 quit()
+    #             if board.check_tie():
+    #                 print('GAME TIED!  YOU BOTH LOSE!')
+    #                 quit()
+            
+            
     while not board.check(team1) and not board.check(team2):
+
+        print("Press 'm' to open menu. Any key to move on with the game.")
+
+        
+
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
-        # board.print_board()
-        # board.print_board_to_file("Tahta.txt")
+        if col =="m":
+            print("Menu Options:")
+            print("1. New Game")
+            print("2. Continue Game")
+            print("3. Save Game")
+            menu_input = input("Select an option: ")
+
+            if menu_input == "1":
+                # Handle new game
+                break
+            elif menu_input == "2":
+                # Handle continue game
+                print("Continuing game...")
+            elif menu_input == "3":
+                # Handle save game
+                print("Saving game...")
+            else:
+                print("Invalid input. Please try again.")
+                continue
+
         board.print_board_to_file("Tahta.txt")
         board.print_board("Tahta.txt")
-        
-        # last_move = board.last_move()
-        # print(last_move)
-        
 
         if board.check(team1):
             print(f'PLAYER 1 ({team1}) WINS!')
@@ -156,15 +224,28 @@ if __name__ == '__main__':
 
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
+        if col =="m":
+            print("Menu Options:")
+            print("1. New Game")
+            print("2. Continue Game")
+            print("3. Save Game")
+            menu_input = input("Select an option: ")
 
-        # board.print_board()
-        # board.print_board_to_file("Tahta.txt")
+            if menu_input == "1":
+                # Handle new game
+                break
+            elif menu_input == "2":
+                # Handle continue game
+                print("Continuing game...")
+            elif menu_input == "3":
+                # Handle save game
+                print("Saving game...")
+            else:
+                print("Invalid input. Please try again.")
+                continue
+
         board.print_board_to_file("Tahta.txt")
         board.print_board("Tahta.txt")
-
-        # last_move = board.last_move()
-        # print(last_move)
-        
 
         if board.check(team2):
             print(f'PLAYER 2 ({team2}) WINS!')
@@ -173,3 +254,8 @@ if __name__ == '__main__':
         if board.check_tie():
             print('GAME TIED!  YOU BOTH LOSE!')
             quit()
+
+            
+            
+           
+
