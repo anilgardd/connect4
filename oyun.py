@@ -187,7 +187,7 @@ if __name__ == '__main__':
 
         print("Press 'm' to open menu. Any key to move on with the game.")
 
-        
+        print("changed stuff")
 
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
