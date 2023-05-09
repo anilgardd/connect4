@@ -10,8 +10,8 @@ class Connect_Four():
         self.board = [[' ' for i in range(Connect_Four.COL_COUNT)] for j in range(
             Connect_Four.ROW_COUNT)]
 
-    def print_board(self, filename=None):
-        with open("tahta.txt", "r") as f:
+    def print_board(self, filename):
+        with open(filename, "r") as f:
             print(f.read())
 
     def reset_board(self, filename):
@@ -118,8 +118,8 @@ class Connect_Four():
 
 if __name__ == '__main__':
     board = Connect_Four()
-    # board.reset_board("Tahta.txt")
-    board.print_board()
+    
+    
 
     team1, team2 = '', ''
 
@@ -137,123 +137,103 @@ if __name__ == '__main__':
 
 
 
-    # while not board.check(team1) and not board.check(team2):
-    #     print("Press 'm' to open menu.")
-    #     user_input = input()
-    #     while True:
-            
-    #         if user_input == "m":
-    #             print("Menu Options:")
-    #             print("1. New Game")
-    #             print("2. Continue Game")
-    #             print("3. Save Game")
-    #             menu_input = input("Select an option: ")
-    #             if menu_input == "1":
-    #                 # Handle new game
-    #                 break
-    #             elif menu_input == "2":
-    #                 # Handle continue game
-    #                 print("Continuing game...")
-    #             elif menu_input == "3":
-    #                 # Handle save game
-    #                 print("Saving game...")
-    #             else:
-    #                 print("Invalid input. Please try again.")
-    #         else:
-    #             col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
-    #             board.drop(col, team1)
-    #             board.print_board_to_file("Tahta.txt")
-    #             board.print_board("Tahta.txt")
-    #             if board.check(team1):
-    #                 print(f'PLAYER 1 ({team1}) WINS!')
-    #                 quit()
-    #             if board.check_tie():
-    #                 print('GAME TIED!  YOU BOTH LOSE!')
-    #                 quit()
-
-    #             col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
-    #             board.drop(col, team2)
-    #             board.print_board_to_file("Tahta.txt")
-    #             board.print_board("Tahta.txt")
-    #             if board.check(team2):
-    #                 print(f'PLAYER 2 ({team2}) WINS!')
-    #                 quit()
-    #             if board.check_tie():
-    #                 print('GAME TIED!  YOU BOTH LOSE!')
-    #                 quit()
+    
             
             
     while not board.check(team1) and not board.check(team2):
 
         print("Press 'm' to open menu. Any key to move on with the game.")
-
-        print("changed stuff")
-
+        
+        
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
         if col =="m":
             print("Menu Options:")
-            print("1. New Game")
-            print("2. Continue Game")
-            print("3. Save Game")
+            print("a. New Game")
+            print("b. Continue Game")
+            print("c. Save Game")
             menu_input = input("Select an option: ")
 
-            if menu_input == "1":
+            if menu_input == "a":
                 # Handle new game
+                
+                
+
                 break
-            elif menu_input == "2":
+            elif menu_input == "b":
                 # Handle continue game
-                print("Continuing game...")
-            elif menu_input == "3":
+                print("Continuing from saved game...")
+                board.print_board("KayıtlıOyun.txt")
+                continue
+            elif menu_input == "c":
                 # Handle save game
                 print("Saving game...")
+                board.print_board_to_file("KayıtlıOyun.txt")
+                continue
             else:
                 print("Invalid input. Please try again.")
                 continue
+        if col != "b" or "c":        
+            board.print_board_to_file("Tahta.txt")
+            board.print_board("Tahta.txt")
 
-        board.print_board_to_file("Tahta.txt")
-        board.print_board("Tahta.txt")
+            if board.check(team1):
+                print(f'PLAYER 1 ({team1}) WINS!')
+                quit()
 
-        if board.check(team1):
-            print(f'PLAYER 1 ({team1}) WINS!')
-            quit()
-
-        if board.check_tie():
-            print('GAME TIED!  YOU BOTH LOSE!')
-            quit()
+            if board.check_tie():
+                print('GAME TIED!  YOU BOTH LOSE!')
+                quit()
 
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
         if col =="m":
             print("Menu Options:")
-            print("1. New Game")
-            print("2. Continue Game")
-            print("3. Save Game")
+            print("a. New Game")
+            print("b. Continue Game")
+            print("c. Save Game")
             menu_input = input("Select an option: ")
 
-            if menu_input == "1":
+            if menu_input == "a":
                 # Handle new game
+                
                 break
-            elif menu_input == "2":
+            elif menu_input == "b":
                 # Handle continue game
-                print("Continuing game...")
-            elif menu_input == "3":
+                print("Continuing from saved game...")
+                board.print_board("KayıtlıOyun.txt")
+                while True:
+                    board.print_board_to_file("KayıtlıOyun.txt")
+                    board.print_board("KayıtlıOyun.txt")
+
+                    if board.check(team2):
+                        print(f'PLAYER 2 ({team2}) WINS!')
+                        quit()
+
+                    if board.check_tie():
+                        print('GAME TIED!  YOU BOTH LOSE!')
+                        quit()
+
+                    break
+            elif menu_input == "c":
                 # Handle save game
                 print("Saving game...")
+                board.print_board_to_file("KayıtlıOyun.txt")
+                continue
             else:
                 print("Invalid input. Please try again.")
                 continue
+        if col != "b" or "c":        
+            board.print_board_to_file("Tahta.txt")
+            board.print_board("Tahta.txt")
 
-        board.print_board_to_file("Tahta.txt")
-        board.print_board("Tahta.txt")
+            if board.check(team2):
+                print(f'PLAYER 2 ({team2}) WINS!')
+                quit()
 
-        if board.check(team2):
-            print(f'PLAYER 2 ({team2}) WINS!')
-            quit()
-
-        if board.check_tie():
-            print('GAME TIED!  YOU BOTH LOSE!')
-            quit()
+            if board.check_tie():
+                print('GAME TIED!  YOU BOTH LOSE!')
+                quit()
 
             
             
