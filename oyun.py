@@ -118,21 +118,25 @@ class Connect_Four():
 
 if __name__ == '__main__':
     board = Connect_Four()
-    
+    #Hamle.txt dosyasını her oyun başlangıcında temizliyoruz
+    with open("Hamle.txt", "w") as f:
+        f.write(f"")
     
 
     team1, team2 = '', ''
 
-    # Players enter the token they wish to use for the game, a token must not be longer than one character, and may not be the same
+    # Oyncuların sembollerini seçtiriyoruz, while döngüsü farklı karakter girilene kadar devam ediyor.
     while len(team1) != 1:
         team1 = input(
-            'Enter a single character to use as your token player 1: ')
+            '1.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
 
     while len(team2) != 1 and team1 != team2:
         team2 = input(
-            'Enter a single character to use as your token player 2: ')
-        if team2 == team1:
-            print('Please choose a token different from player 1...  How ya gonna tell the difference in teams?  Dummy.')
+            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+        while team2 == team1:
+            print('Lütfen 1. oyuncunun seçtiğinden farklı bir karakter seçiniz.')
+            team2 = input(
+            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
 
 
 
