@@ -128,15 +128,15 @@ if __name__ == '__main__':
     # Oyncuların sembollerini seçtiriyoruz, while döngüsü farklı karakter girilene kadar devam ediyor.
     while len(team1) != 1:
         team1 = input(
-            '1.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+            '1.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
 
     while len(team2) != 1 and team1 != team2:
         team2 = input(
-            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
         while team2 == team1:
-            print('Lütfen 1. oyuncunun seçtiğinden farklı bir karakter seçiniz.')
+            print('Lütfen 1. oyuncunun seçtiğinden farklı bir karakter seçiniz! ')
             team2 = input(
-            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
 
 
 
@@ -146,17 +146,17 @@ if __name__ == '__main__':
             
     while not board.check(team1) and not board.check(team2):
 
-        print("Press 'm' to open menu. Any key to move on with the game.")
+        print("Press '0' to open menu. Any key to move on with the game.")
         
         
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
-        if col =="m":
+        if col =="0":
             print("Menu Options:")
-            print("a. New Game")
-            print("b. Continue Game")
-            print("c. Save Game")
-            menu_input = input("Select an option: ")
+            print("a. Yeni oyun.")
+            print("b. Kayıtlı oyunu devam ettir.")
+            print("c. Oyunu kaydet.")
+            menu_input = input("Seçeneklerden birini seçiniz. ")
 
             if menu_input == "a":
                 # Handle new game
@@ -165,67 +165,114 @@ if __name__ == '__main__':
 
                 break
             elif menu_input == "b":
-                # Handle continue game
-                print("Continuing from saved game...")
+                print("Kaydedilmiş oyundan devam ediyoruz...")
+                col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
+                board.drop(col, team1)
+          
+                board.print_board_to_file("KayıtlıOyun.txt")
                 board.print_board("KayıtlıOyun.txt")
-                continue
+        
+       
+
+                if board.check(team1):
+                    print(f'PLAYER 1 ({team1}) WINS!')
+                    quit()
+
+                if board.check_tie():
+                    print('GAME TIED!  YOU BOTH LOSE!')
+                    quit()
+
+                col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
+                board.drop(col, team2)
+
+                
+                board.print_board_to_file("KayıtlıOyun.txt")
+                board.print_board("KayıtlıOyun.txt")
+
+        
+
+                if board.check(team2):
+                    print(f'PLAYER 2 ({team2}) WINS!')
+                    quit()
+
+                if board.check_tie():
+                    print('GAME TIED!  YOU BOTH LOSE!')
+                    quit()
             elif menu_input == "c":
                 # Handle save game
-                print("Saving game...")
+                print("Oyun kaydedildi.")
                 board.print_board_to_file("KayıtlıOyun.txt")
                 continue
             else:
-                print("Invalid input. Please try again.")
+                print("Geçersiz input, tekrar dene.")
                 continue
         if col != "b" or "c":        
             board.print_board_to_file("Tahta.txt")
             board.print_board("Tahta.txt")
 
             if board.check(team1):
-                print(f'PLAYER 1 ({team1}) WINS!')
+                print(f'1. oyuncu ({team1}) kazandı!')
                 quit()
 
             if board.check_tie():
-                print('GAME TIED!  YOU BOTH LOSE!')
+                print('Berabere!')
                 quit()
 
+        print("Press '0' to open menu. Any key to move on with the game.")
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
-        if col =="m":
+        if col =="0":
             print("Menu Options:")
-            print("a. New Game")
-            print("b. Continue Game")
-            print("c. Save Game")
-            menu_input = input("Select an option: ")
+            print("a. Yeni oyun.")
+            print("b. Kayıtlı oyunu devam ettir.")
+            print("c. Oyunu kaydet.")
+            menu_input = input("Seçeneklerden birini seçiniz. ")
 
             if menu_input == "a":
                 # Handle new game
                 
                 break
             elif menu_input == "b":
-                # Handle continue game
-                print("Continuing from saved game...")
+                print("Kaydedilmiş oyundan devam ediyoruz...")
+                col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
+                board.drop(col, team1)
+          
+                board.print_board_to_file("KayıtlıOyun.txt")
                 board.print_board("KayıtlıOyun.txt")
-                while True:
-                    board.print_board_to_file("KayıtlıOyun.txt")
-                    board.print_board("KayıtlıOyun.txt")
+        
+       
 
-                    if board.check(team2):
-                        print(f'PLAYER 2 ({team2}) WINS!')
-                        quit()
+                if board.check(team1):
+                    print(f'PLAYER 1 ({team1}) WINS!')
+                    quit()
 
-                    if board.check_tie():
-                        print('GAME TIED!  YOU BOTH LOSE!')
-                        quit()
+                if board.check_tie():
+                    print('GAME TIED!  YOU BOTH LOSE!')
+                    quit()
 
-                    break
+                col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
+                board.drop(col, team2)
+
+                
+                board.print_board_to_file("KayıtlıOyun.txt")
+                board.print_board("KayıtlıOyun.txt")
+
+        
+
+                if board.check(team2):
+                    print(f'PLAYER 2 ({team2}) WINS!')
+                    quit()
+
+                if board.check_tie():
+                    print('GAME TIED!  YOU BOTH LOSE!')
+                    quit()
             elif menu_input == "c":
                 # Handle save game
-                print("Saving game...")
+                print("Oyun kaydedildi.")
                 board.print_board_to_file("KayıtlıOyun.txt")
                 continue
             else:
-                print("Invalid input. Please try again.")
+                print("Geçersiz input, tekrar dene.")
                 continue
         if col != "b" or "c":        
             board.print_board_to_file("Tahta.txt")
