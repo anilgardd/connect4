@@ -151,7 +151,7 @@ if __name__ == '__main__':
         
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
-        if col =="m":
+        if col =="10":
             print("Menu Options:")
             print("a. New Game")
             print("b. Continue Game")
@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
-        if col =="m":
+        if col =="10":
             print("Menu Options:")
             print("a. New Game")
             print("b. Continue Game")
