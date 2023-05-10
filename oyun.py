@@ -44,29 +44,32 @@ class Connect_Four():
 
     
     def drop(self, col, team: str):
-        
-        if col:
-            if col.isdigit():
-                col = int(col)
-                if col < len(self.board[0]) and col > -1 or col == None:
-                    col -= 1
-                    if self.board[0][col] == ' ':
-                        for i in range(len(self.board)-1, -1, -1):
-                            if self.board[i][col] == ' ':
-                                self.board[i][col] = team
-                                with open("Hamle.txt", "a") as f:
-                                    f.write(f"{team}: ({col}, {i})\n")
-                                break
-                        else:
-                            print('That column is full dill weed. Look much? You\'ve lost your turn.')
-                    else:
-                        print('That column is full dill weed. Look much? You\'ve lost your turn.')
-                else:
-                    print('1... to... ' + str(len(self.board[0])) + '... dumbass... You lose your turn.')
-            else:
-                print('NUMBERS (WO)MAN! I NEED NUMBERS! Lose a turn.')
-        else:
+        if col is None:
             print('... You have to enter something you troglodite. Lose a turn.')
+            return
+        if not col.isdigit():
+            print('NUMBERS (WO)MAN! I NEED NUMBERS! Lose a turn.')
+            return
+        col = int(col)
+        if col == 0:
+            print('The first column does not exist. Try again.')
+            return
+        if col < 1 or col > len(self.board[0]):
+            print('1... to... ' + str(len(self.board[0])) + '... dumbass... You lose your turn.')
+            return
+        col -= 1
+        if self.board[0][col] == ' ':
+            for i in range(len(self.board)-1, -1, -1):
+                if self.board[i][col] == ' ':
+                    self.board[i][col] = team
+                    with open("Hamle.txt", "a") as f:
+                        f.write(f"{team}: ({col+1}, {i})\n")
+                    break
+            else:
+                print('That column is full dill weed. Look much? You\'ve lost your turn.')
+        else:
+            print('That column is full dill weed. Look much? You\'ve lost your turn.')
+
         
     
 
@@ -151,7 +154,7 @@ if __name__ == '__main__':
         
         col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
         board.drop(col, team1)
-        if col =="10":
+        if col =="0":
             print("Menu Options:")
             print("a. New Game")
             print("b. Continue Game")
@@ -191,7 +194,7 @@ if __name__ == '__main__':
 
         col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
         board.drop(col, team2)
-        if col =="10":
+        if col =="0":
             print("Menu Options:")
             print("a. New Game")
             print("b. Continue Game")
