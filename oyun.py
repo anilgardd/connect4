@@ -1,10 +1,10 @@
 import os
 
+
 class Connect_Four():
-    
+
     COL_COUNT = 9
     ROW_COUNT = 9
-
 
     def __init__(self):
         self.board = [[' ' for i in range(Connect_Four.COL_COUNT)] for j in range(
@@ -18,44 +18,33 @@ class Connect_Four():
         with open(filename, 'w') as f:
             f.write('')
 
+    
 
-    # def print_board(self):
-
-    #     result = ''
-    #     for i in self.board:
-    #         result += '-' * 23 + '\n'
-    #         for j in i:
-    #             result += f'|{j}'
-    #         result += '|\n'
-    #     result += '-' * 23
-    #     print(result)
-
-    def print_board_to_file (self, filename):
-        with open(filename,'w') as f:
-            result=''
-            result += '-' * 23 
+    def print_board_to_file(self, filename):
+        with open(filename, 'w') as f:
+            result = ''
+            result += '-' * 23
             for i in self.board:
                 result += '\n'
                 for j in i:
                     result += f'|{j}'
-                result+='|\n'
-            result += '-' *23
+                result += '|\n'
+            result += '-' * 23
             f.write(result)
 
-    
     def drop(self, col, team: str):
         if col is None:
-            print('... You have to enter something you troglodite. Lose a turn.')
+            print('Tur kaybettiniz.')
             return
         if not col.isdigit():
-            print('NUMBERS (WO)MAN! I NEED NUMBERS! Lose a turn.')
+            print('Lütfen sayı giriniz.')
             return
         col = int(col)
         if col == 0:
-            print('The first column does not exist. Try again.')
             return
         if col < 1 or col > len(self.board[0]):
-            print('1... to... ' + str(len(self.board[0])) + '... dumbass... You lose your turn.')
+            print('1 den' +
+                  str(len(self.board[0])) + ' ' +' a kadar bir sayı giriniz.')
             return
         col -= 1
         if self.board[0][col] == ' ':
@@ -63,21 +52,14 @@ class Connect_Four():
                 if self.board[i][col] == ' ':
                     self.board[i][col] = team
                     with open("Hamle.txt", "a") as f:
-                        f.write(f"{team}: ({col+1}, {i})\n")
+                        f.write(
+                            f"{team} sembolune sahip takim : ({col+1}, {i}) konumuna pul birakti.\n")
                     break
             else:
-                print('That column is full dill weed. Look much? You\'ve lost your turn.')
+                print(
+                    'Kolon dolu, tur kaybettiniz.')
         else:
-            print('That column is full dill weed. Look much? You\'ve lost your turn.')
-
-        
-    
-
-            
-
-
-
-  
+            print('Kolon dolu, tur kaybettiniz.')
 
     def check(self, team: str):
 
@@ -114,135 +96,106 @@ class Connect_Four():
                 if j == ' ':
                     return False
         return True
-    
-        
 
-   
 
 if __name__ == '__main__':
     board = Connect_Four()
-    #Hamle.txt dosyasını her oyun başlangıcında temizliyoruz
+    # Hamle.txt dosyasını her oyun başlangıcında temizliyoruz
     with open("Hamle.txt", "w") as f:
         f.write(f"")
-    
 
     team1, team2 = '', ''
-
+    print("CONNECT 4 OYUNUNA HOŞGELDİNİZ!")
     # Oyncuların sembollerini seçtiriyoruz, while döngüsü farklı karakter girilene kadar devam ediyor.
     while len(team1) != 1:
         team1 = input(
-            '1.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+            '1.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
 
     while len(team2) != 1 and team1 != team2:
         team2 = input(
-            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
         while team2 == team1:
-            print('Lütfen 1. oyuncunun seçtiğinden farklı bir karakter seçiniz.')
+            print('Lütfen 1. oyuncunun seçtiğinden farklı bir karakter seçiniz!')
             team2 = input(
-            '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz. ')
+                '2.Oyuncu olarak tahtada kullanacağınız karakteri seçiniz: ')
 
-
-
-
-    
-            
-            
     while not board.check(team1) and not board.check(team2):
 
-        print("Press 'm' to open menu. Any key to move on with the game.")
-        
-        
-        col = input(f'Player 1 ({team1}) insert piece in col (1-9): ')
+        print("Menüye ulaşmak için '0' a basınız")
+
+        col = input(
+            f'1. oyuncu ({team1}) , lütfen bir kolona pul bırakınız. ')
         board.drop(col, team1)
-        if col =="0":
-            print("Menu Options:")
-            print("a. New Game")
-            print("b. Continue Game")
-            print("c. Save Game")
-            menu_input = input("Select an option: ")
+        if col == "0":
+            print("Menü Seçenekleri")
+            print("a. Yeni Oyun")
+            print("b. Kayıtlı Oyun")
+            print("c. Oyunu Kaydet.")
+            menu_input = input("a-b-c arasından seçiniz. ")
 
             if menu_input == "a":
-                # Handle new game
+                board = Connect_Four()
+                continue
+
+            elif menu_input == "b":
                 
+                print("Kayıtlı oyun başlatılıyor.")
+                board.print_board("KayıtlıOyun.txt")
                 
 
-                break
-            elif menu_input == "b":
-                # Handle continue game
-                print("Continuing from saved game...")
-                board.print_board("KayıtlıOyun.txt")
-                continue
             elif menu_input == "c":
                 # Handle save game
                 print("Saving game...")
                 board.print_board_to_file("KayıtlıOyun.txt")
                 continue
-            else:
-                print("Invalid input. Please try again.")
-                continue
-        if col != "b" or "c":        
+        if col != "b" or "c":
             board.print_board_to_file("Tahta.txt")
             board.print_board("Tahta.txt")
 
             if board.check(team1):
-                print(f'PLAYER 1 ({team1}) WINS!')
+                print(f'Oyuncu 1 ({team1}) kazandı!')
                 quit()
 
             if board.check_tie():
-                print('GAME TIED!  YOU BOTH LOSE!')
+                print('Berabere!')
                 quit()
-
-        col = input(f'Player 2 ({team2}) insert piece in col (1-): ')
+        print("Menüye ulaşmak için '0' a basınız")
+        col = input(
+            f'2. oyuncu ({team2}) , lütfen bir kolona pul bırakınız. ')
         board.drop(col, team2)
-        if col =="0":
-            print("Menu Options:")
-            print("a. New Game")
-            print("b. Continue Game")
-            print("c. Save Game")
-            menu_input = input("Select an option: ")
+        if col == "0":
+            print("Menü Seçenekleri")
+            print("a. Yeni Oyun")
+            print("b. Kayıtlı Oyun")
+            print("c. Oyunu Kaydet.")
+            menu_input = input("a-b-c arasından seçiniz. ")
 
             if menu_input == "a":
-                # Handle new game
+                board = Connect_Four()
+                continue
                 
-                break
             elif menu_input == "b":
-                # Handle continue game
-                print("Continuing from saved game...")
+               
+                print("Kayıtlı oyun başlatılıyor.")
                 board.print_board("KayıtlıOyun.txt")
-                while True:
-                    board.print_board_to_file("KayıtlıOyun.txt")
-                    board.print_board("KayıtlıOyun.txt")
+                
 
-                    if board.check(team2):
-                        print(f'PLAYER 2 ({team2}) WINS!')
-                        quit()
-
-                    if board.check_tie():
-                        print('GAME TIED!  YOU BOTH LOSE!')
-                        quit()
-
-                    break
             elif menu_input == "c":
                 # Handle save game
-                print("Saving game...")
+                print("Oyun KayıtlıOyun.txt dosyasına kaydedildi.")
                 board.print_board_to_file("KayıtlıOyun.txt")
                 continue
             else:
-                print("Invalid input. Please try again.")
+                print("Geçersiz input. Tekrar deneyiniz.")
                 continue
-        if col != "b" or "c":        
-            board.print_board_to_file("Tahta.txt")
-            board.print_board("Tahta.txt")
+        
+        board.print_board_to_file("Tahta.txt")
+        board.print_board("Tahta.txt")
 
-            if board.check(team2):
-                print(f'PLAYER 2 ({team2}) WINS!')
-                quit()
+        if board.check(team2):
+            print(f'Oyuncu 2  ({team2})kazandı!')
+            quit()
 
-            if board.check_tie():
-                print('GAME TIED!  YOU BOTH LOSE!')
-                quit()
-
-            
-            
-           
-
+        if board.check_tie():
+            print('Berabere!')
+            quit()

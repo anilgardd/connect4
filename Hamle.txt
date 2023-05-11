@@ -1,3 +1,6 @@
-0: (0, 8)
-x: (1, 8)
-x: (-1, 8)
+0 sembolune sahip takim : (1, 8) konumuna pul birakti.
+x sembolune sahip takim : (2, 8) konumuna pul birakti.
+0 sembolune sahip takim : (3, 8) konumuna pul birakti.
+x sembolune sahip takim : (4, 8) konumuna pul birakti.
+0 sembolune sahip takim : (5, 8) konumuna pul birakti.
+0 sembolune sahip takim : (8, 8) konumuna pul birakti.
