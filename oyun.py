@@ -1,4 +1,5 @@
 import os
+import copy
 
 
 class Connect_Four():
@@ -100,6 +101,7 @@ class Connect_Four():
 
 if __name__ == '__main__':
     board = Connect_Four()
+    newBoard= Connect_Four()
     # Hamle.txt dosyasını her oyun başlangıcında temizliyoruz
     with open("Hamle.txt", "w") as f:
         f.write(f"")
@@ -145,7 +147,7 @@ if __name__ == '__main__':
 
             elif menu_input == "c":
                 # Handle save game
-                print("Saving game...")
+                print("Oyun KayıtlıOyun.txt dosyasına kaydedildi.")
                 board.print_board_to_file("KayıtlıOyun.txt")
                 continue
         if col != "b" or "c":
@@ -178,6 +180,8 @@ if __name__ == '__main__':
                
                 print("Kayıtlı oyun başlatılıyor.")
                 board.print_board("KayıtlıOyun.txt")
+                newBoard= Connect_Four()
+               
                 
 
             elif menu_input == "c":
